@@ -1,15 +1,15 @@
 klompok 1 aplikasi toko buku
 
-Khoirul Amir Fajri (17090033)
-Eri Kusnadi (17090018)
-Muhammad Agus Andriansyah (17090065)
-cara install buka terminal
+1. Khoirul Amir Fajri (17090033)
+2. Eri Kusnadi (17090018)
+3. Muhammad Agus Andriansyah (17090065)
+3. cara install buka terminal
 
-git clone ( masukan url )
-composer update
-copy .env.example .env
-sesuaikan nama database dan env
-php artisan migrate
-php artisan db:seed
-login : admin@gmail.com
-password : admin123
+1. git clone ( masukan url )
+2. composer update
+3. copy .env.example .env
+4. sesuaikan nama database dan env
+5. php artisan migrate
+6. php artisan db:seed
+7. login : admin@gmail.com
+8. password : admin123
