@@ -30,7 +30,7 @@
 
 		<form class="login100-form validate-form" action="{{ route('register') }}" method="POST">
         @csrf
-			<span class="login100-form-title"style="margin-top: 30px">Create an Account!</span>
+			<span class="login100-form-title"style="margin-top: 30px">Tambah Akun</span>
 
             <div class="wrap-input100 validate-input">
 				<input class="input100" placeholder="Nama" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
