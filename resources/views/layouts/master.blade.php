@@ -101,6 +101,10 @@
               <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
               Activity Log
             </a>
+            <a class="dropdown-item" href="{{route('change.password')}}">
+              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+              Ganti Password
+            </a>
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout

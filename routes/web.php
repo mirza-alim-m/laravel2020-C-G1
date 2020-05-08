@@ -30,5 +30,8 @@ Route::middleware('auth')->group(function(){
     Route::resource('databuku', 'DatabukuController');
     Route::resource('produkmasuk', 'ProdukmasukController');
     Route::resource('transaksi', 'TransaksiController');
+
+    Route::get('change-password', 'ChangePasswordController@index');
+    Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
     
 });

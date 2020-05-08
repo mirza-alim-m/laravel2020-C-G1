@@ -17,7 +17,7 @@ class DatabukusSeeder extends Seeder
             DB::table('databukus')->insert([
                 'id_kategori' => $categories[$i]->id_kategori,
                 'nama_barang'=>$faker->sentence,
-                'harga' => $faker->numberBetween($min = 100,$max = 150),
+                'harga' => $faker->numberBetween($min = 50.000,$max = 500.000),
                 'qty' => $faker->numberBetween(6,12),
             ]);
         }
