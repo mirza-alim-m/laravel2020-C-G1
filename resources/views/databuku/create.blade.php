@@ -19,13 +19,13 @@
   </div>
   <div class="card-body">
     <div class="table-responsive">
-    <form action="{{route('databuku.store')}}" method="post">
+    <form action="{{route('databuku.store')}}" method="post" enctype="multipart/form-data">
 		{{ csrf_field() }}
         <input type="hidden" id="id" name="id">
         <div class="box-body">
             <div class="form-group">
                 <label >Name</label>
-                <input type="text" class="form-control" id="nama" name="nama"  autofocus required>
+                <input type="text" class="form-control" id="nama_barang" name="nama_barang"  autofocus required>
                 <span class="help-block with-errors"></span>
             </div>
         </div>
@@ -54,7 +54,23 @@
                 <input type="text" class="form-control" id="qty" name="qty"  autofocus required>
                 <span class="help-block with-errors"></span>
             </div>
-        </div>
+        </div>                         
+        <div class="form-group">
+            <div class="form-line">
+              <div class="fallback">
+                      <label>UNGGAH GAMBAR</label>
+                            <input name="cover" type="file" multiple required />
+                                </div>
+                            </div>
+                        </div>
+            <div class="form-group">
+              <div class="form-line">
+                                <div class="fallback">
+                                    <label>UNGGAH DOKUMEN</label>
+                                    <input name="doc_pdf" type="file" multiple required />
+                                </div>
+                            </div>
+                        </div>  
         <input type="submit" class="btn btn-primary" value="Tambah Data">
         <a href="/databuku" class="btn btn-outline-primary">Kembali</a>
 	</form>

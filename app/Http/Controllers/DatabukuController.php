@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Databuku;
 use App\Category;
 use DataTables;
+use Storage;
 
 class DatabukuController extends Controller
 {
@@ -16,7 +17,7 @@ class DatabukuController extends Controller
      */
     public function index(Request $request)
     {
-
+        $databuku = Databuku::latest()->get();
         if($request->ajax()){
             $data = Databuku::latest()->get();
             return DataTables::of($data)->addIndexColumn()
@@ -35,7 +36,7 @@ class DatabukuController extends Controller
             ->RawColumns(['action'])
             ->make(true);
         }
-        return view('databuku.index');
+        return view('databuku.index', compact('databuku'));
         
     }
 
@@ -60,12 +61,48 @@ class DatabukuController extends Controller
     {
         $databuku = new Databuku();
         $databuku->id_kategori = $request->input('id_kategori');
-        $databuku->nama_barang = $request->input('nama');
+        $databuku->nama_barang = $request->input('nama_barang');
         $databuku->harga = $request->input('harga');
         $databuku->qty = $request->input('qty');
-        $databuku->save();
+        // $databuku->save();
+        // request()->validate([
+        //     'id_kategori' => 'required',
+        //     'nama_barang' => 'required',
+        //     'harga' => 'required',
+        //     'qty' => 'required',
+        //     'cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        //     'doc_pdf' => 'required|mimes:pdf|max:2048',
+
+        // ]);
+
+        if ($request->has('active')) {
+            $active = 1;
+        } else {
+            $active = 0;
+        }
+
+        $fileNameImage = time().'.'.request()->cover->getClientOriginalExtension();
+        $fileNamePdf = time().'.'.request()->doc_pdf->getClientOriginalExtension();
         
-        return redirect('databuku')->with('success', 'Data buku baru telah ditambahkan');
+        // $databuku = new Databuku();
+        // $databuku->id_kategori = $request->input('id_kategori');
+        // $databuku->nama_barang = $request->input('nama');
+        // $databuku->harga = $request->input('harga');
+        // $databuku->qty = $request->input('qty');
+
+            
+            if ($request->cover->move(storage_path('app/public/databuku/gambar'), $fileNameImage)) {
+                $databuku->cover = "storage/databuku/gambar/".$fileNameImage;
+            }
+            if ($request->doc_pdf->move(storage_path('app/public/databuku/pdf'), $fileNamePdf)) {
+                $databuku->doc_pdf = "storage/databuku/pdf/".$fileNamePdf;
+            }
+            
+           
+            $databuku->save();
+        
+
+        return redirect('/databuku')->with('success', 'Data buku baru telah ditambahkan');
     }
 
     /**
@@ -109,6 +146,29 @@ class DatabukuController extends Controller
         $databuku->id_kategori = $request->id_kategori;
         $databuku->harga = $request->harga;
         $databuku->qty = $request->qty;
+        if ($request->has('active')) {
+            $active = 1;
+        } else {
+            $active = 0;
+        }
+
+        $fileNameImage = time().'.'.request()->cover->getClientOriginalExtension();
+        $fileNamePdf = time().'.'.request()->doc_pdf->getClientOriginalExtension();
+        
+        // $databuku = new Databuku();
+        // $databuku->id_kategori = $request->input('id_kategori');
+        // $databuku->nama_barang = $request->input('nama');
+        // $databuku->harga = $request->input('harga');
+        // $databuku->qty = $request->input('qty');
+
+            
+            if ($request->cover->move(storage_path('app/public/databuku/gambar'), $fileNameImage)) {
+                $databuku->cover = "storage/databuku/gambar/".$fileNameImage;
+            }
+            if ($request->doc_pdf->move(storage_path('app/public/databuku/pdf'), $fileNamePdf)) {
+                $databuku->doc_pdf = "storage/databuku/pdf/".$fileNamePdf;
+            }
+            
         $databuku->save();
 
          // alihkan halaman ke halaman Index

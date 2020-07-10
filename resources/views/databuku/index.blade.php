@@ -26,9 +26,12 @@
           <tr>
           <th>No</th>
           <th>Nama Buku</th>
+          <!-- <th>Cover</th> -->
+          
           <th>Kategori</th>
           <th>Harga</th>
           <th>Qty</th>
+          <!-- <th>File</th> -->
           <th><center>Action</center></th>
           </tr>
         </thead>
@@ -36,9 +39,12 @@
           <tr>
             <th>No</th>
             <th>Nama Buku</th>
+            <!-- <th>Cover</th> -->
+           
             <th>Kategori</th>
             <th>Harga</th>
             <th>Qty</th>
+            <!-- <th>File</th> -->
             <th><center>Action</center></th>
           </tr>
         </tfoot>
@@ -64,9 +70,12 @@ $(function() {
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'nama_barang', name: 'nama_barang'},
+            // {data: 'cover', name: 'cover'},
             {data: 'nama_kategori', name: 'nama_kategori'},
             {data: 'harga', name: 'harga'},
             {data: 'qty', name: 'qty'},
+            // {data: 'doc_pdf', name: 'doc_pdf class="btn bg-grey waves-effect m-r-20">Download Pdf'},
+            
             {data: 'action', name: 'action',orderable : false, searchable: false, sClass: 'text-center'}
            ]
           })
@@ -92,6 +101,7 @@ $(function() {
             }
         })
     }
-</script>    
+</script>  
+
 
 @endsection

@@ -58,6 +58,24 @@
                 <span class="help-block with-errors"></span>
             </div>
         </div>
+      
+        <div class="form-group">
+          <div class="form-line">
+              <label for="file">UBAH GAMBAR</label>
+                <div class="fallback">
+                        <img src="{{ asset($pdc->cover) }}" class="mask waves-effect waves-light rgba-white-slight" height="100px" width="auto" alt="tidak ada gambar">
+                        <input name="cover" type="file" multiple value="{{ $pdc->cover }}" />
+                </div>
+          </div>
+        </div>
+        <div class="form-group">
+             <div class="form-line">
+                  <label for="file">UBAH DOKUMEN</label>
+                         <div class="fallback">
+                          <input name="doc_pdf" type="file" multiple value="{{ $pdc->doc_pdf }}" />
+                         </div>
+              </div>
+          </div>
         <input type="submit" class="btn btn-primary" value="Edit Data">
         <a href="/databuku" class="btn btn-outline-primary">Kembali</a>
 	</form>

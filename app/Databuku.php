@@ -10,7 +10,8 @@ class Databuku extends Model
 
     protected $table = 'databukus';
     protected $primaryKey = 'id_buku';
-    protected $fillable = ['id_kategori','nama_barang','harga','qty'];
+    protected $fillable = ['id_kategori','cover','nama_barang','harga','qty','doc_pdf'];
+
 
     public function category()
     {

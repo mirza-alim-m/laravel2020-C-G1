@@ -22,15 +22,31 @@
             <th>Kategori</th>
             <th>Harga</th>
             <th>Qty</th>
+            <th width="20%">Cover</th>
+            <th>PDF</th>
           </tr>
         </tfoot>
         <tbody>
-          @foreach ($databuku as $brg)
+          @foreach ($databuku as $brg =>$databuku)
             <tr>
-                <td class="align-middle">{{ $brg->nama_barang }}</td>
-                <td class="align-middle">{{ $brg->category->nama_kategori }}</td>
-                <td class="align-middle">{{ $brg->harga }}</td>
-                <td class="align-middle">{{ $brg->qty }}</td>
+                <td class="align-middle">{{ $databuku->nama_barang }}</td>
+                <td class="align-middle">{{ $databuku->category->nama_kategori }}</td>
+                
+                <td class="align-middle">{{ $databuku->harga }}</td>
+                <td class="align-middle">{{ $databuku->qty }}</td>
+                <td>@if($databuku->cover != NULL)
+                            <img src="{{ asset($databuku->cover) }}" alt="" width="48%;" height="3%" style="margin-top:20px; margin-left:40px">
+                            @else
+                                <h5 style="color:red">Tidak ada Gambar</h5>
+                            @endif
+                </td>
+                <td>
+                    @if($databuku->doc_pdf!= NULL)
+                        <a href="{{ asset($databuku->doc_pdf) }}" class="btn bg-grey waves-effect m-r-20">Download Pdf</a>
+                    @else
+                        <h5 style="color:red">Tidak ada file PDF</h5>
+                    @endif 
+                </td>
             </tr>
           @endforeach
         </tbody>

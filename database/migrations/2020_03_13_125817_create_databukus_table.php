@@ -19,7 +19,9 @@ class CreateDatabukusTable extends Migration
 
             $table->string('nama_barang');
             $table->integer('harga');
+            $table->string('cover')->nullable();
             $table->integer('qty');
+            $table->string('doc_pdf')->nullable();
             $table->timestamps();
 
             $table->foreign('id_kategori')->references('id_kategori')->on('categories')->onDelete('cascade');
