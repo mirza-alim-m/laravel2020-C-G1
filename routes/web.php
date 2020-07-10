@@ -23,6 +23,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//verifikasi email
+Auth::routes(['verify' => true]);
+
 Route::middleware('auth')->group(function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('user', 'UserController');
