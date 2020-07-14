@@ -12,8 +12,8 @@ class Category extends Model
     protected $primaryKey = 'id_kategori';
     protected $fillable = ['nama_kategori'];
 
-    public function databuku()
+    public function products()
     {
-        return $this->hasMany(Databuku::class, 'id_buku');
+        return $this->hasMany(Product::class, 'id_barang');
     }
 }

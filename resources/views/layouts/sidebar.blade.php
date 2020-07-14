@@ -6,7 +6,7 @@
 
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
-    <div class="sidebar-brand-icon rotate-n-15">
+    <div class="">
       <i class=""></i>
     </div>
     <div class="sidebar-brand-text mx-3">Toko Buku <sup>Online</sup></div>
@@ -28,10 +28,10 @@
 
   <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active"><a class="nav-link" href="{{ route('user.index') }}"><i class="fas fa-fw fa-user"></i><span>Users</span></a></li>
-      <li class="nav-item active"><a class="nav-link" href="{{ route('categories.index') }}"><i class="fas fa-fw fa-list-alt"></i><span>Kategori Buku</span></a></li>
-      <li class="nav-item active"><a class="nav-link" href="{{ route('databuku.index') }}"><i class="fas fa-fw fa-cube"></i><span>Data Buku</span></a></li>
-      <li class="nav-item active"><a class="nav-link" href="{{ route('produkmasuk.index') }}"><i class="fas fa-fw fa-plus"></i><span>Produk Masuk</span></a></li>
-      <li class="nav-item active"><a class="nav-link" href="{{ route('transaksi.index') }}"><i class="fas fa-fw fa-minus"></i><span>Transaksi</span></a></li>
+      <li class="nav-item active"><a class="nav-link" href="{{ route('categories.index') }}"><i class="fas fa-fw fa-list-alt"></i><span>kategori buku</span></a></li>
+      <li class="nav-item active"><a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-fw fa-cube"></i><span>produk buku</span></a></li>
+      <li class="nav-item active"><a class="nav-link" href="{{ route('stockin.index') }}"><i class="fas fa-fw fa-plus"></i><span>Stok masuk</span></a></li>
+      <li class="nav-item active"><a class="nav-link" href="{{ route('stockout.index') }}"><i class="fas fa-fw fa-minus"></i><span>Stok keluar </span></a></li>
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">

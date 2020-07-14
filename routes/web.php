@@ -21,20 +21,22 @@ Route::get('/', function () {
 // 	return view('layouts.master');
 // });
 
-Auth::routes();
-
-//verifikasi email
 Auth::routes(['verify' => true]);
 
+Route::get('auth/{provider}', 'Auth\SocialiteController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\SocialiteController@handleProviderCallback');
+
 Route::middleware('auth')->group(function(){
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
     Route::resource('user', 'UserController');
     Route::resource('categories', 'CategoryController');
-    Route::resource('databuku', 'DatabukuController');
-    Route::resource('produkmasuk', 'ProdukmasukController');
-    Route::resource('transaksi', 'TransaksiController');
+    Route::resource('product', 'ProductController');
+    Route::resource('stockin', 'StockinController');
+    Route::resource('stockout', 'StockoutController');
 
-    Route::get('change-password', 'ChangePasswordController@index');
-    Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
-    
+    Route::get('change-password', 'PasswordController@edit')->name('change-password');
+    Route::patch('change-password', 'PasswordController@update')->name('change-password.update');
+
+    Route::get('update-profile', 'ProfileController@edit')->name('update-profile');
+    Route::patch('update-profile', 'ProfileController@update')->name('update-profile.update');
 });

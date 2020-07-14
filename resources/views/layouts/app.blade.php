@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="shortcut icon" href="{{ asset('images/xxx.png') }}"> -->
+    <link rel="shortcut icon" href="{{ asset('images/book-1.png') }}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.nam', 'Toko Buku Online') }}</title>
+    <title>{{ config('app.name', 'Tokobuku') }}</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -60,7 +60,7 @@
             <div class="container" style="margin-top: 25px">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
-                <!-- <img src="{{ asset('images/xxx.png') }}" style="width:200px;" alt="Toko buku online"> -->
+                <img src="{{ asset('images/book-1.png') }}" style="width:200px;" alt="buku">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <i class="fas fa-lg fa-fw fa-navicon" style="color:#fff;"></i>
@@ -79,7 +79,7 @@
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ route('register') }}"><i class="fas fa-lg fa-fw fa-key "></i>{{ __(' Registrasi') }}</a>
+                                    <a class="nav-link text-light" href="{{ route('register') }}"><i class="fas fa-lg fa-fw fa-key "></i>{{ __(' Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -88,7 +88,12 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>  
-                                    <img class="img-profile rounded-circle" style="width:25px;" src="{{ asset('images/person.png') }}">
+                                    <!-- <img class="img-profile rounded-circle" style="width:25px;" src="{{ asset('images/user.png') }}"> -->
+                                    @if(Auth::user()->avatar)
+                                        <img class="img-profile rounded-circle" style="width:25px;" src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="">
+                                    @else
+                                        <img class="img-profile rounded-circle" style="width:25px;" src="{{ asset('images/user.png') }}">
+                                    @endif
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -120,7 +125,7 @@
         </div>
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
-          <button class="btn btn-primary" type="button" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
           <a class="btn btn-primary" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">

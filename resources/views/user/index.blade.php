@@ -7,13 +7,17 @@
 @endsection
 
 @section('content')
-@include('sweet::alert')
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Users</h1><br>
-
+@if(Session::has('success'))
+    <div class="alert alert-success">
+        <strong>Success: </strong>{{ Session::get('success') }}
+        <button type="button" class="close" data-dismiss="alert">×</button> 
+    </div>
+@endif
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
@@ -26,7 +30,7 @@
         <thead class="thead-light">
           <tr>
             <th>No</th>
-            <th>Nama</th>
+            <th>Name</th>
             <th>Email</th>
             <th>Role</th>
             <th><center>Action</center></th>
@@ -35,7 +39,7 @@
         <tfoot class="thead-light">
           <tr>
             <th>No</th>
-            <th>Nama</th>
+            <th>Name</th>
             <th>Email</th>
             <th>Role</th>
             <th><center>Action</center></th>

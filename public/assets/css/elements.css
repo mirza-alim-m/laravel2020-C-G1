@@ -425,7 +425,7 @@ section
 	height: 96px;
 	background: #190a49;
 	z-index: 100;
-	border-bottom: solid 2px #FF8C00;
+	border-bottom: solid 2px #ff0e3b;
 }
 .header_wrap
 {
@@ -720,7 +720,7 @@ section
 {
 	height: 65px;
 	width: 100%;
-	background: #FF8C00;
+	background: #190a49;
 	padding-left: 40px;
 	cursor: pointer;
 	color: #ffffff;
@@ -737,11 +737,11 @@ section
 }
 .accordion:hover
 {
-	background: #FF8C00;
+	background: #ff0e3b;
 }
 .accordion.active
 {
-	background: #FF8C00;
+	background: #ff0e3b;
 }
 .accordion.active:hover
 {
@@ -787,7 +787,7 @@ section
 {
 	content: '-';
 	color: #FFFFFF;
-	background: #FF8C00;
+	background: #190a49;
 }
 .accordion:hover::after
 {
@@ -828,7 +828,7 @@ section
 .tab
 {
 	height: 65px;
-	background: #FF8C00;
+	background: #190a49;
 	font-size: 14px;
 	color: #ffffff;
 	font-weight: 700;
@@ -851,7 +851,7 @@ section
 }
 .tab:hover
 {
-	background: #FF8C00;
+	background: #ff0e3b;
 }
 .tab:not(:last-child)
 {
@@ -1063,7 +1063,7 @@ section
 
 .footer
 {
-    background: #FF8C00;
+    background: #190a49;
 }
 .footer_content
 {

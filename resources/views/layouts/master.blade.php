@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="{{ asset('images/book-shop.png') }}">
-    <title>{{ config('app.na', 'Toko Buku Online') }}</title>
+    <link rel="shortcut icon" href="{{ asset('images/book-1.png') }}">
+    <title>{{ config('app.name', 'Tokobuku') }}</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -85,26 +85,23 @@
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="mr-2 d-none d-lg-inline text-gray-600 medium">{{ \Auth::user()->name  }}</span>
-          <img class="img-profile rounded-circle" src="{{ asset('images/person.png') }}">
+              @if(Auth::user()->avatar)
+                  <img class="img-profile rounded-circle" src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="">
+              @else
+                  <img class="img-profile rounded-circle" src="{{ asset('images/user.png') }}">
+              @endif
           </a>
           <!-- Dropdown - User Information -->
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{ route('update-profile') }}">
               <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
               Profile
             </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-              Settings
+            <a class="dropdown-item" href="{{ route('change-password') }}">
+              <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+              Change Password
             </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-              Activity Log
-            </a>
-            <a class="dropdown-item" href="{{route('change.password')}}">
-              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-              Ganti Password
-            </a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
@@ -158,8 +155,9 @@
     <footer class="sticky-footer" style="margin-top:30px">
         <div class="container">
           <div class="copyright text-center">
-            <h6 class="m-0 font-weight-bold text-primary">Toko Buku Online</h6>
-           
+            <h6 class="m-0 font-weight-bold text-primary">Tokobuku<sup>Online</sup> - Pemalang</h6>
+            <?php $date = date('Y')?>
+            <strong>Copyright &copy; {{$date}} <a href="https://github.com/tiaraarista">Tokobuku</a>.</strong> All rights reserved.
         </div>
       </div>
     </footer>

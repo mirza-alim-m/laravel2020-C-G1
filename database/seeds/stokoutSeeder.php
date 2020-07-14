@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Databuku;
+use App\Product;
 
-class ProdukmasuksSeeder extends Seeder
+class stokoutSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,12 +12,11 @@ class ProdukmasuksSeeder extends Seeder
      */
     public function run(Faker\Generator $faker)
     {
-        $databukus = Databuku::all();
+        $products = Product::all();
         for ($i=0; $i < 25; $i++) {
-            DB::table('produkmasuks')->insert([
-                'id_buku' => $databukus[$i]->id_buku,
-  
-                 'qty' => $faker->numberBetween($min = 100,$max = 150),
+            DB::table('stockouts')->insert([
+                'id_barang' => $products[$i]->id_barang,
+                'qty' => $faker->numberBetween($min = 100,$max = 150),
               
                 // 'qty' => $faker->numberBetween(6,12),
             ]);
