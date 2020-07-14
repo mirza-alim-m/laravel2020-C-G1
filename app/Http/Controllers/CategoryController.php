@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
-use App\Databuku;
+use App\Product;
 use DataTables;
 
 class CategoryController extends Controller
@@ -52,7 +52,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-         // memanggil view tambah
          return view('categories.create');
     }
 
@@ -64,11 +63,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'category_name' => 'required|unique:categories,nama_kategori',
+        ]);
+
         $ctg = new Category;
-        $ctg->nama_kategori = $request->get('nama');
+        $ctg->nama_kategori = $request->get('category_name');
         $ctg->save();
         
-        return redirect('categories')->with('success', 'Kategori baru telah ditambahkan');
+        return redirect('categories')->with('success', 'Kategori baru berhasil ditambahkan');
     }
 
     /**
@@ -80,8 +83,9 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::where('id_kategori',$id)->get();
-        $databukus = Databuku::where('id_kategori',$id)->get();
-        return view('categories.show', ['category' => $category],['databukus' => $databukus]);
+        $products = Product::where('id_kategori',$id)->get();
+        
+        return view('categories.show', ['category' => $category],['products' => $products]);
     }
 
     /**
@@ -92,9 +96,8 @@ class CategoryController extends Controller
      */
     public function edit($id_kategori)
     {
-        // mengambil data kategori berdasarkan id yang dipilih
        $category = Category::where('id_kategori',$id_kategori)->get();
-       // passing data kategori yang didapat ke view edit.blade.php
+
        return view('categories.edit',['category' => $category]);
     }
 
@@ -107,16 +110,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id_kategori)
     {
+        $validatedData = $request->validate([
+            'category_name' => 'required',
+        ]);
+
         $category = Category::findOrFail($id_kategori);
-        $category->nama_kategori = $request->nama_kategori;
+        $category->nama_kategori = $request->category_name;
         $category->save();
 
-         // alihkan halaman ke halaman Index
-         if($request->old_name == $request->nama_kategori){
-            return redirect('/categories')->with(['error' => 'Gagal Edit! Data masih sama!']);
-        }else{
-            return redirect('/categories')->with(['success' => 'Berhasil! mengubah '.$request->old_name.' menjadi '.$request->nama_kategori]);
-        }
+        return redirect('/categories')->with(['success' => 'Berhasil diubah']);
     }
 
     /**
@@ -128,7 +130,6 @@ class CategoryController extends Controller
     public function destroy(Request $request, $id_kategori)
     {
         Category::destroy($id_kategori);
-        $nama = $request->name;
-        return redirect('categories')->with(['success' => 'Berhasil! Data '.$nama.' berhasil dihapus.']);
+        return redirect('categories')->with(['success' => 'Kategori berhasil dihapus']);
     }
 }

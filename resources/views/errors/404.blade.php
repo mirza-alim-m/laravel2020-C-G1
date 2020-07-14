@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="{{ asset('images/ponsel.png') }}">
-    <title>{{ config('app.na', 'Toko Buku Online') }}</title>
+    <title>{{ config('app.name', 'Tivia') }}</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">

@@ -1,4 +1,4 @@
-@extends('layouts.master') 
+@extends('layouts.master')
 
 @section('top')
     <!-- {{-- Datatables --}} -->
@@ -11,7 +11,7 @@
 <div class="container-fluid">
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Categories</h1><br>
+<h1 class="h3 mb-2 text-gray-800">Stock In</h1><br>
 @if(Session::has('success'))
     <div class="alert alert-success">
         <strong>Success: </strong>{{ Session::get('success') }}
@@ -22,29 +22,33 @@
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-    <a href="{{route('categories.create')}}" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Add Category</a><br>
+    <a href="{{route('stockin.create')}}" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Add Stock In</a><br>
   </div>
   <div class="card-body">
     <div class="table-responsive">
-    <table class="table table-bordered data-table" width="100%" cellspacing="0">
-          <thead class="thead-light">
+      <table class="table table-bordered data-table" width="100%" cellspacing="0">
+        <thead class="thead-light">
           <tr>
-          <th scope="col">No</th>
-          <th scope="col">Kategori</th>
-          <th scope="col"><center>Action</center></th>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Qty</th>
+            <th>Created At</th>
+            <th><center>Action</center></th>
           </tr>
         </thead>
         <tfoot class="thead-light">
           <tr>
             <th>No</th>
-            <th>Kategori</th>
+            <th>Name</th>
+            <th>Qty</th>
+            <th>Created At</th>
             <th><center>Action</center></th>
           </tr>
         </tfoot>
         <tbody>
-            <tr>
+          <tr>
             <td></td>
-            </tr>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -53,23 +57,24 @@
 
 </div>
 <!-- /.container-fluid -->
-
 <script>
 $(function() {
    const table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
         autoWidth: true,
-        ajax: {url:"{{ route('categories.index') }}"},
+        ajax: {url:"{{ route('stockin.index') }}"},
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'nama_kategori', name: 'nama_kategori'},
+            {data: 'nama_barang', name: 'nama_barang'},
+            {data: 'qty', name: 'qty'},
+            {data: 'created_at', name: 'created_at'},
             {data: 'action', name: 'action',orderable : false, searchable: false, sClass: 'text-center'}
            ]
           })
         })
 
-        function deleteData(id_kategori) {
+        function deleteData(id_stockin) {
         swal({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -85,7 +90,7 @@ $(function() {
             }
         });
             if (willDelete) {
-                $('#data' + id_kategori).submit();
+                $('#data' + id_stockin).submit();
             }
         })
     }

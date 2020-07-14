@@ -3,36 +3,36 @@
 @section('content')
 <body class="bg-gradient-primary">
 <center><div class="limiter">
+<div class="card-body">
+    @if (session('status'))
+    <div class="alert alert-success" role="alert">
+        {{ session('status') }}
+    </div>
+    @endif
     <div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<br><img src="{{ asset('images/img-login.png') }}" alt="IMG">
+					<br><img src="{{ asset('images/book-shop.png') }}" alt="IMG">
 				</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                <form class="login100-form validate-form" action="{{ route('password.email') }}" method="POST">
+                <form class="login100-form validate-form" action="{{ route('password.email') }}" method="POST" novalidate>
                 @csrf
                     <span class="login100-form-title"  style="margin-top: 50px">Forgot Your Password?</span>
                     <p>Just enter your email address below and we'll send you a link to reset your password!</p><br>
+                    <div>
                     <div class="wrap-input100 validate-input">
-                        <input class="input100" placeholder="Email Address" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                        <span class="focus-input100"></span>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <!-- <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span>
-
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                        </span> -->
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                     <div class="container-login100-form-btn">
                             <button type="submit" class="login100-form-btn">{{ __('Send') }}</button>

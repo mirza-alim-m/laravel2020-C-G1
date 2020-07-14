@@ -177,7 +177,7 @@ iframe {
 
 .wrap-login100 {
   width: 960px;
-  background: #FF7F00;
+  background: #fff;
   border-radius: 10px;
   overflow: hidden;
 
@@ -349,7 +349,7 @@ iframe {
 }
 
 .login100-form-btn:hover {
-  background: #FF7F00;
+  background: #FF6347;
 }
 
 

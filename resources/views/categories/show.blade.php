@@ -23,14 +23,14 @@
           <tr>
             <th>No</th>
             <th>Kategori</th>
-            <th>Databukus</th>
+            <th>Products</th>
           </tr>
         </thead>
         <tfoot class="thead-light">
           <tr>
             <th>No</th>
             <th>Kategori</th>
-            <th>Databukus</th>
+            <th>Products</th>
           </tr>
         </tfoot>
         <tbody>
@@ -45,7 +45,7 @@
                         @php
                             $n = 1;
                         @endphp
-                    @foreach ($databukus as $pdc)
+                    @foreach ($products as $pdc)
                     {{$n++}}. {{ $pdc->nama_barang }} <?php echo"</br>";?>
                     @endforeach
                 </td>
