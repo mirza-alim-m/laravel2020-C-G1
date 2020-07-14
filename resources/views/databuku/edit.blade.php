@@ -20,7 +20,7 @@
   <div class="card-body">
     <div class="table-responsive">
     @foreach ($databuku as $pdc)
-    <form action="{{action('DatabukuController@update', $pdc->id_buku)}}" method="POST" class="needs-validation" novalidate>
+    <form action="{{route('databuku.update', $pdc->id_buku)}}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
         @method('PATCH')
         {{ csrf_field() }}
 		<input type="hidden" name="id" value="{{ $pdc->id_buku }}">

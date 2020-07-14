@@ -66,6 +66,8 @@ class CategoryController extends Controller
     {
         $ctg = new Category;
         $ctg->nama_kategori = $request->get('nama');
+
+        
         $ctg->save();
         
         return redirect('categories')->with('success', 'Kategori baru telah ditambahkan');

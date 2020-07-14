@@ -140,38 +140,96 @@ class DatabukuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id_buku)
-    {
-        $databuku = Databuku::findOrFail($id_buku);
-        $databuku->nama_barang = $request->nama_barang;
-        $databuku->id_kategori = $request->id_kategori;
-        $databuku->harga = $request->harga;
-        $databuku->qty = $request->qty;
+    {   
+        $imgbuku = Databuku::where("id_buku","=",$id_buku)->get()->first()->cover;
+        $pdfbuku = Databuku::where("id_buku","=",$id_buku)->get()->first()->doc_pdf;
+        
+        if (!$request->cover) {
+            
+            $request->validate([
+            'nama_barang' => 'required',
+            'id_kategori' => 'required',
+            'harga' => 'required',
+            'qty' => 'required',
+            'doc_pdf' => 'required|mimes:pdf|max:2048',    
+            ]);
+            
+            $fileNamePdf = time().'.'.request()->doc_pdf->getClientOriginalExtension();
+        }else if (!$request->doc_pdf){
+            $request->validate([
+                'nama_barang' => 'required',
+                'id_kategori' => 'required',
+                'harga' => 'required',
+                'cover' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+                'qty' => 'required',
+                
+            ]);
+             $fileNameImage = time().'.'.request()->cover->getClientOriginalExtension();
+        }else{
+            $request->validate([
+                'nama_barang' => 'required',
+                'id_kategori' => 'required',
+                'harga' => 'required',
+                'cover' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+                'qty' => 'required',
+                'doc_pdf' => 'required|mimes:pdf|max:2048', 
+            ]);
+            $fileNameImage = time().'.'.request()->cover->getClientOriginalExtension();
+            $fileNamePdf = time().'.'.request()->doc_pdf->getClientOriginalExtension();
+        } 
+        
         if ($request->has('active')) {
             $active = 1;
         } else {
             $active = 0;
         }
+        $databuku = Databuku::findOrFail($id_buku);
+        $databuku->id_kategori = $request->id_kategori;
+        $databuku->nama_barang = $request->nama_barang;
+        $databuku->harga = $request->harga;
+        $databuku->qty = $request->qty;
 
-        $fileNameImage = time().'.'.request()->cover->getClientOriginalExtension();
-        $fileNamePdf = time().'.'.request()->doc_pdf->getClientOriginalExtension();
+        $databuku->cover = $request->cover;
+        if($request->hasFile('cover')){
+            if (is_file($databuku->cover)){
+                try{
+                    unlink($imgbuku);
+                } catch(\Exception $e){
+
+                }
+            }
+            $request->cover->move(storage_path('app/public/databuku/gambar'), $fileNameImage);
+            $databuku->cover = "storage/databuku/gambar/".$fileNameImage;
+        } else {
+            $databuku->cover = $imgbuku;
+        }
+
+        $databuku->doc_pdf = $request->doc_pdf;
+        if($request->hasFile('doc_pdf')){
+            if (is_file($databuku->doc_pdf)){
+                try{
+                    unlink($pdfbuku);
+                } catch(\Exception $e){
+
+                }
+            }
+            $request->doc_pdf->move(storage_path('app/public/databuku/pdf'), $fileNamePdf);
+            $databuku->doc_pdf = "storage/databuku/pdf/".$fileNamePdf;
+        } else {
+            $databuku->doc_pdf = $pdfbuku;
+        }
         
         // $databuku = new Databuku();
         // $databuku->id_kategori = $request->input('id_kategori');
         // $databuku->nama_barang = $request->input('nama');
         // $databuku->harga = $request->input('harga');
         // $databuku->qty = $request->input('qty');
-
-            
-            if ($request->cover->move(storage_path('app/public/databuku/gambar'), $fileNameImage)) {
-                $databuku->cover = "storage/databuku/gambar/".$fileNameImage;
-            }
-            if ($request->doc_pdf->move(storage_path('app/public/databuku/pdf'), $fileNamePdf)) {
-                $databuku->doc_pdf = "storage/databuku/pdf/".$fileNamePdf;
-            }
-            
+        
         $databuku->save();
 
+
          // alihkan halaman ke halaman Index
+        
             return redirect('/databuku')->with(['success' => 'Berhasil! diubah']);
         
     }

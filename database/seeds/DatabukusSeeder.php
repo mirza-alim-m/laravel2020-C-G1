@@ -18,7 +18,7 @@ class DatabukusSeeder extends Seeder
                 'id_kategori' => $categories[$i]->id_kategori,
                 'nama_barang'=>$faker->sentence,
                 'harga' => $faker->numberBetween($min = 50.000,$max = 500.000),
-                'cover' => $faker->image,
+                
                 'qty' => $faker->numberBetween(6,12),
             ]);
         }
