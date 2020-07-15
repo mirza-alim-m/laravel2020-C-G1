@@ -16,7 +16,7 @@ class stokinSeeder extends Seeder
         for ($i=0; $i < 25; $i++) {
             DB::table('stockins')->insert([
                 'id_barang' => $products[$i]->id_barang,
-                 'qty' => $faker->numberBetween($min = 100,$max = 150),
+                'qty' => $faker->numberBetween($min = 100,$max = 150),
               
                 // 'qty' => $faker->numberBetween(6,12),
             ]);

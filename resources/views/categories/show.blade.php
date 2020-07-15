@@ -23,14 +23,18 @@
           <tr>
             <th>No</th>
             <th>Kategori</th>
-            <th>Products</th>
+            <th width="20%">Cover</th>
+            <th>PDF</th>
+            <!-- <th>Products</th> -->
           </tr>
         </thead>
         <tfoot class="thead-light">
           <tr>
             <th>No</th>
             <th>Kategori</th>
-            <th>Products</th>
+            <th width="10%">Cover</th>
+            <th>PDF</th>
+            <!-- <th width="50%">Products</th> -->
           </tr>
         </tfoot>
         <tbody>
@@ -41,14 +45,26 @@
             <tr>
                 <td>{{$no++}}</td>
                 <td>{{ $ctg->nama_kategori }}</td>
-                <td>
-                        @php
-                            $n = 1;
-                        @endphp
-                    @foreach ($products as $pdc)
-                    {{$n++}}. {{ $pdc->nama_barang }} <?php echo"</br>";?>
-                    @endforeach
+                <td>@if($ctg->cover != NULL)
+                            <img src="{{ asset($ctg->cover) }}" alt="" width="48%;" height="3%" style="margin-top:20px; margin-left:40px">
+                            @else
+                                <h5 style="color:red">Tidak ada Gambar</h5>
+                            @endif
                 </td>
+                <td>
+                    @if($ctg->doc_pdf!= NULL)
+                        <a href="{{ asset($ctg->doc_pdf) }}" class="btn bg-grey waves-effect m-r-20">Download Pdf</a>
+                    @else
+                        <h5 style="color:red">Tidak ada file PDF</h5>
+                    @endif 
+                </td>
+                <!-- @foreach ($databukus as $dtb)
+                <td>
+                    
+                    {{ $dtb ->nama_barang }}
+                   
+                </td>
+                @endforeach -->
             </tr>
           @endforeach
         </tbody>

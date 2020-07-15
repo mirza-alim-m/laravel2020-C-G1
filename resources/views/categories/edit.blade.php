@@ -19,7 +19,7 @@
   <div class="card-body">
     <div class="table-responsive">
     @foreach ($category as $ctg)
-    <form action="{{action('CategoryController@update', $ctg->id_kategori)}}" method="POST" class="needs-validation" novalidate>
+    <form action="{{action('CategoryController@update', $ctg->id_kategori)}}" method="POST" class="needs-validation" enctype="multipart/form-data">
         @method('PATCH')
         {{ csrf_field() }}
 		    <input type="hidden" name="id" value="{{ $ctg->id_kategori }}">
@@ -27,14 +27,31 @@
         <div class="box-body">
             <div class="form-group">
                 <label >Category Name</label>
-                <input type="text" class="form-control @error('category_name') is-invalid @enderror" name="category_name" value="{{ $ctg->nama_kategori }}" autofocus required>
+                <input type="text" class="form-control @error('nama_kategori') is-invalid @enderror" name="nama_kategori" value="{{ $ctg->nama_kategori }}" autofocus required>
                 <span class="help-block with-errors"></span>
-                @error('category_name')
+                @error('nama_kategori')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
             </div>
+            <div class="form-group">
+          <div class="form-line">
+              <label for="file">UBAH GAMBAR</label>
+                <div class="fallback">
+                        <img src="{{ asset($ctg->cover) }}" class="mask waves-effect waves-light rgba-white-slight" height="100px" width="auto" alt="tidak ada gambar">
+                        <input name="cover" type="file" multiple value="{{ $ctg->cover }}" />
+                </div>
+          </div>
+        </div>
+        <div class="form-group">
+             <div class="form-line">
+                  <label for="file">UBAH DOKUMEN</label>
+                         <div class="fallback">
+                          <input name="doc_pdf" type="file" multiple value="{{ $ctg->doc_pdf }}" />
+                         </div>
+              </div>
+          </div>
         </div>
         <input type="submit" class="btn btn-primary" value="Edit Data">
         <a href="/categories" class="btn btn-outline-primary">Kembali</a>

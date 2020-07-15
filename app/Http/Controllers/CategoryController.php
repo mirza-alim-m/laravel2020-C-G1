@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
-use App\Product;
+use App\Databuku;
 use DataTables;
 
 class CategoryController extends Controller
@@ -19,7 +19,7 @@ class CategoryController extends Controller
     {
         // $categories = Category::all();
         // return view('categories.index', compact('categories'));
-
+        $categ = Category::latest()->get();
         if($request->ajax()){
             $data = Category::latest()->get();
             return DataTables::of($data)->addIndexColumn()
@@ -36,7 +36,7 @@ class CategoryController extends Controller
             ->RawColumns(['action'])
             ->make(true);
         }
-        return view('categories.index');
+        return view('categories.index',compact('categ'));
     }
 
     // public function index()
@@ -52,6 +52,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+         // memanggil view tambah
          return view('categories.create');
     }
 
@@ -63,21 +64,38 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'category_name' => 'required|unique:categories,nama_kategori',
-        ]);
+        $categ = Category::create([
+        'nama_kategori' => $request->input('nama_kategori'),
+        'cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'doc_pdf' => 'required|mimes:pdf|max:2048',
+        
+    ]);
+       
+        $fileNameImage = time().'.'.request()->cover->getClientOriginalExtension();
+        $fileNamePdf = time().'.'.request()->doc_pdf->getClientOriginalExtension();
 
-        $ctg = new Category;
-<<<<<<< HEAD
-        $ctg->nama_kategori = $request->get('nama');
+        // $categ = new Category;
+        // $categ->nama_kategori = $request->nama_kategori;
+ 
+        // if ($request->has('active')) {
+        //     $active = 1;
+        // } else {
+        //     $active = 0;
+        // }
 
         
-=======
-        $ctg->nama_kategori = $request->get('category_name');
->>>>>>> 9ef7556e529ef8540b4ff1f3cb9f0dd06bee9096
-        $ctg->save();
         
-        return redirect('categories')->with('success', 'Kategori baru berhasil ditambahkan');
+         
+        if ($request->cover->move(storage_path('app/public/category/gambar'), $fileNameImage)) {
+            $categ->cover = "storage/category/gambar/".$fileNameImage;
+        }
+        if ($request->doc_pdf->move(storage_path('app/public/category/pdf'), $fileNamePdf)) {
+            $categ->doc_pdf = "storage/category/pdf/".$fileNamePdf;
+        }
+
+        $categ->save();
+        
+        return redirect('/categories')->with('success', 'Kategori baru telah ditambahkan');
     }
 
     /**
@@ -89,9 +107,8 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::where('id_kategori',$id)->get();
-        $products = Product::where('id_kategori',$id)->get();
-        
-        return view('categories.show', ['category' => $category],['products' => $products]);
+        $databukus = Databuku::where('id_buku',$id)->get();
+        return view('categories.show',compact('category','databukus'));
     }
 
     /**
@@ -102,8 +119,9 @@ class CategoryController extends Controller
      */
     public function edit($id_kategori)
     {
+        // mengambil data kategori berdasarkan id yang dipilih
        $category = Category::where('id_kategori',$id_kategori)->get();
-
+       // passing data kategori yang didapat ke view edit.blade.php
        return view('categories.edit',['category' => $category]);
     }
 
@@ -116,15 +134,79 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id_kategori)
     {
-        $validatedData = $request->validate([
-            'category_name' => 'required',
-        ]);
-
+        $imgbuku = Category::where("id_kategori","=",$id_kategori)->get()->first()->cover;
+        $pdfbuku = Category::where("id_kategori","=",$id_kategori)->get()->first()->doc_pdf;
+        
+        if (!$request->cover) {
+            
+            $request->validate([
+            'nama_kategori' => 'required',
+            'doc_pdf' => 'required|mimes:pdf|max:2048',    
+            ]);
+            
+            $fileNamePdf = time().'.'.request()->doc_pdf->getClientOriginalExtension();
+        }else if (!$request->doc_pdf){
+            $request->validate([
+                'nama_kategori' => 'required',
+                'cover' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+                
+            ]);
+             $fileNameImage = time().'.'.request()->cover->getClientOriginalExtension();
+        }else{
+            $request->validate([
+                'nama_kategori' => 'required',
+                'doc_pdf' => 'required|mimes:pdf|max:2048',
+                'cover' => 'required|mimes:jpeg,png,jpg,gif|max:2048', 
+            ]);
+            $fileNameImage = time().'.'.request()->cover->getClientOriginalExtension();
+            $fileNamePdf = time().'.'.request()->doc_pdf->getClientOriginalExtension();
+        } 
+        
+        if ($request->has('active')) {
+            $active = 1;
+        } else {
+            $active = 0;
+        }
         $category = Category::findOrFail($id_kategori);
-        $category->nama_kategori = $request->category_name;
-        $category->save();
+        $category->nama_kategori = $request->nama_kategori;
 
-        return redirect('/categories')->with(['success' => 'Berhasil diubah']);
+        $category->cover = $request->cover;
+        if($request->hasFile('cover')){
+            if (is_file($category->cover)){
+                try{
+                    unlink($imgbuku);
+                } catch(\Exception $e){
+
+                }
+            }
+            $request->cover->move(storage_path('app/public/category/gambar'), $fileNameImage);
+            $category->cover = "storage/category/gambar/".$fileNameImage;
+        } else {
+            $category->cover = $imgbuku;
+        }
+
+        $category->doc_pdf = $request->doc_pdf;
+        if($request->hasFile('doc_pdf')){
+            if (is_file($category->doc_pdf)){
+                try{
+                    unlink($pdfbuku);
+                } catch(\Exception $e){
+
+                }
+            }
+            $request->doc_pdf->move(storage_path('app/public/category/pdf'), $fileNamePdf);
+            $category->doc_pdf = "storage/category/pdf/".$fileNamePdf;
+        } else {
+            $category->doc_pdf = $pdfbuku;
+        }
+        
+        // $category = new Databuku();
+        // $category->id_kategori = $request->input('id_kategori');
+        // $category->nama_kategori = $request->input('nama');
+        // $category->harga = $request->input('harga');
+        // $category->qty = $request->input('qty');
+        
+        $category->save();
     }
 
     /**
@@ -136,6 +218,7 @@ class CategoryController extends Controller
     public function destroy(Request $request, $id_kategori)
     {
         Category::destroy($id_kategori);
-        return redirect('categories')->with(['success' => 'Kategori berhasil dihapus']);
+        $nama = $request->name;
+        return redirect('categories')->with(['success' => 'Berhasil! Data '.$nama.' berhasil dihapus.']);
     }
 }
