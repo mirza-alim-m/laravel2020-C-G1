@@ -207,6 +207,7 @@ class CategoryController extends Controller
         // $category->qty = $request->input('qty');
         
         $category->save();
+        return redirect('/categories')->with(['success' => 'Berhasil! diubah']);
     }
 
     /**
