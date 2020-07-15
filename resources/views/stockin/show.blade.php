@@ -31,6 +31,8 @@
             <th>Nama</th>
             <th>Kategori</th>
             <th>Qty</th>
+            <th width="20%">Cover</th>
+            <th>PDF</th>
             <th>Created At</th>
           </tr>
         </thead>
@@ -40,6 +42,8 @@
             <th>Name</th>
             <th>Kategori</th>
             <th>Qty</th>
+            <th width="20%">Cover</th>
+            <th>PDF</th>
             <th>Created At</th>
           </tr>
         </tfoot>
@@ -50,6 +54,8 @@
                 <td>{{ $stc->product->nama_barang }}</td>
                 <td>{{ $stc->product->category->nama_kategori }}</td>
                 <td>{{ $stc->qty }}</td>
+                <td>{{$stc->product->cover}}</td>
+                <td>{{$stc->product->doc_pdf}}</td>
                 <td>{{ $stc->created_at->format('d-m-Y H:i') }}</td>
             </tr>
           @endforeach
