@@ -207,7 +207,13 @@ class CategoryController extends Controller
         // $category->qty = $request->input('qty');
         
         $category->save();
+
+
+         // alihkan halaman ke halaman Index
+        
+            return redirect('/categories')->with(['success' => 'Berhasil! diubah']);
     }
+        
 
     /**
      * Remove the specified resource from storage.
