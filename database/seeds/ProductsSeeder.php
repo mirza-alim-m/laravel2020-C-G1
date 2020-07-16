@@ -70,5 +70,101 @@ class ProductsSeeder extends Seeder
             'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
             'qty' => 3,
         ]);
+
+         DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+          DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+           DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+            DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+             DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+              DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+               DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+                DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+                 DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+                  DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+                   DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
+
+                    DB::table('products')->insert([
+            'id_kategori' => 1,
+            'nama_barang'=>'Buku Laravel (mahir)',
+            'harga' => 599000,
+            'spesifikasi' => 'buku ini menjadikan mahir laravel dalam 1minggu',
+            'qty' => 3,
+        ]);
     }
 }

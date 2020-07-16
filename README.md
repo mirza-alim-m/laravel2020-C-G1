@@ -16,4 +16,5 @@
 7. php artisan db:seed
 8. php artisan storage:link
 9. php artisan serve
+10. login email : admin@gmail.com password : admin123
 ```
