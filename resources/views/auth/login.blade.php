@@ -71,6 +71,7 @@
             <a href="{{ url('/auth/google') }}" class="btn btn-google"><i class="fa fa-google"></i>{{ __(' Sign in With Your Google Account') }}</a>
             <!-- <a href="{{ url('/auth/github') }}" class="btn btn-light"><i class="fa fa-github"></i></a>
             <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i></a> -->
+            <!-- <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a> -->
 		</form>
 	</div>
 </div></center>
